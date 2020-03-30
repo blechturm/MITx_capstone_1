@@ -1,0 +1,85 @@
+\section{Maximum likelihood estimation}
+
+Let $\left\{ E,\left(\mathbf{P}_{\theta }\right)_{\theta \in \Theta }\right\}$  be a statistical model associated with a sample of i.i.d. random variables $X_1, X_2, \dots , X_ n$. Assume that there exists $\theta ^* \in \Theta$ such that $X_ i \sim \mathbf{P}_{\theta ^*}$.
+
+The \textbf{likelihood} of the model is the product of the $n$ samples of the pdf/pmf:
+
+\begin{align*}
+L_n{(X_1, X_2, \dots , X_ n, \theta)} = \\
+{\begin{cases}
+    \displaystyle \prod_{i=1}^np_\theta(x_i) & \text{if }E\text{ is discrete} \\
+    \displaystyle \prod_{i=1}^nf_\theta(x_i) & \text{if }E\text{ is continous}
+\end{cases}}
+\end{align*}
+The maximum likelihood estimator is the (unique) $\theta$ that minimizes $\widehat{\text {KL}}\left(\mathbf{P}_{\theta ^*}, \mathbf{P}_{\theta }\right)$ over the parameter space. (The minimizer of the KL divergence is unique due to it being strictly convex in the space of distributions once  is fixed.)
+\begin{align*}
+\widehat{\theta }_ n^{MLE}& = \displaystyle \text {argmin}_{\theta \in \Theta }\widehat{\text {KL}}_ n\left(\mathbf{P}_{\theta ^*}, \mathbf{P}_{\theta }\right)\\
+&= \displaystyle \text {argmax}_{\theta \in \Theta } \sum _{i=1}^{n} \ln p_{\theta }(X_ i)\\  
+&= \displaystyle \text {argmax}_{\theta \in \Theta } \ln \left(\prod _{i=1}^{n} p_{\theta }(X_ i)\right)
+\end{align*}
+
+Since taking derivatives of products is hard but easy for sums and $exp()$ is very common in pdfs we usually take the log of the likelihood function before maximizing it.
+\begin{align*}
+\ell((X_1, X_2, \dots , X_ n, \theta)) &= ln(L_n{(X_1, X_2, \dots , X_ n, \theta)})\\
+ &= \sum_{i=1}^n  ln(L_i(X_i,\theta)
+\end{align*}
+
+Cookbook: set up the likelihood function, take log of likelihood function. Take the partial derivative of the loglikelihood function wrt. the parameter(s). Set the partial derivative(s) to zero and solve for the parameter.
+
+If an indicator function on the pdf/pmf does not depend on the parameter, it can be ignored. If it depends on the parameter it can't be ignored because there is an discontinuity in the loglikelihood function. The maximum/minimum of the $X_i$ is then the maximum likelihood estimator.
+
+\subsection{Fisher Information}
+
+The Fisher information is the covariance matrix of the gradient of the loglikelihood function. It is equal to the negative expectation of the Hessian of the loglikelihood function and captures the negative of the expected curvature of the loglikelihood function.\\
+
+Let $\theta \in \Theta \subset \mathbb {R}^ d$ and let $\left(E,\left\{ \mathbf{P}_\theta \right\} _{\theta \in \Theta }\right)$ be a statistical model. Let $f_{\theta }(\mathbf x)$ be the pdf of the distribution $\mathbf{P}_\theta$. Then, the Fisher information of the statistical model is.\\
+
+$\mathcal{I}(\theta) = Cov(\nabla \ell(\theta)) = \\ = \mathbb{E}[\nabla \ell(\theta))\nabla\ell(\theta)^T] -  \mathbb{E}[\nabla \ell(\theta)]\mathbb{E}[\nabla \ell(\theta)] =\\ = -\mathbb{E}[\mathbb{H}\ell(\theta)]$\\
+
+Where $\ell (\theta ) = \ln f_\theta (\mathbf X)$.If $\nabla\ell(\theta) \in \mathbb{R}^d$ it is a $d \times d$ matrix. The definition when the distribution has a pmf $p_\theta (\mathbf x)$ is also the same, with the expectation taken with respect to the pmf.\\
+
+Let $(\mathbb {R}, \{ \mathbf{P}_\theta \} _{\theta \in \mathbb {R}})$ denote a continuous statistical model. Let $f_\theta (x)$ denote the pdf (probability density function) of the continuous distribution $\mathbf{P}_\theta$. Assume that $f_\theta (x)$ is twice-differentiable as a function of the parameter $\theta$.\\
+
+Formula for the calculation of Fisher Information of $X$:\\
+
+$\mathcal{I}(\theta )= \int _{-\infty }^\infty \frac{\left(\frac{\partial f_\theta (x)}{\partial \theta }\right)^2}{f_\theta (x)} \,  dx$ \\
+
+Models with one parameter (ie. Bernulli):\\
+
+$\mathcal{I}(\theta ) = \textsf{Var}(\ell '(\theta ))$\\
+
+$\mathcal{I}(\theta ) = - \mathbf{E}(\ell ''(\theta ))$\\
+
+Models with multiple parameters (ie. Gaussians):\\
+
+$\mathcal{I}(\theta ) = -\mathbb E\left[\mathbf{H}\ell (\theta )\right]$\\
+
+Cookbook:\\
+
+Better to use 2nd derivative.\\
+
+\begin{itemize}
+  \item Find loglikelihood
+  \item Take second derivative (=Hessian if multivariate)
+  \item Massage second derivative or Hessian (isolate functions of $X_i$ to use with $- \mathbf{E}(\ell ''(\theta ))$ or $-\mathbb E\left[\mathbf{H}\ell (\theta )\right]$.
+  \item Find the expectation of the functions of $X_i$ and subsitute them back into the Hessian or the second derivative. Be extra careful to subsitute the right power back. $\mathbb{E}[X_i] \neq \mathbb{E}[X_i^2]$.
+  \item Don't forget the minus sign!
+\end{itemize}
+
+\subsection{Asymptotic normality of the maximum likelihood estimator}
+
+Under certain conditions the MLE is asymptotically normal and consistent. This applies even if the MLE is not the sample average.
+
+Let the true parameter $\theta^{*} \in \Theta$. Necessary assumptions:
+
+\begin{itemize}
+\item The parameter is identifiable
+\item For all $\theta \in \Theta$, the support $\mathbb{P}_{\theta}$ does not depend on $\theta$ (e.g. like in $Unif(0,\theta)$);
+\item $\theta^{*}$ is not on the boundary of $\Theta$;
+\item Fisher information $\mathcal{I}(\theta)$  is invertible in the neighborhood of $\theta^{*}$
+\item A few more technical conditions
+\end{itemize}
+
+The asymptotic variance of the MLE is the inverse of the fisher information.
+
+$\sqrt(n)(\widehat{\theta }_ n^{\text {MLE}} - \theta^*) \xrightarrow[n \rightarrow \infty]{(d)} N_d(0,\mathcal{I}(\theta^* )^{-1})$\\

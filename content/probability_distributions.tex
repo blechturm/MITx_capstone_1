@@ -1,0 +1,348 @@
+\section{Important probability distributions}
+\subsection*{Bernoulli}
+Parameter $p \in[0,1]$, discrete\\
+$ p_x(k)=
+	\begin{cases}
+		 p,&\text{if k = 1}\\
+		(1-p),&\text{if k = 0}\\
+	\end{cases}
+$\\
+
+$\mathbb{E}[X]=p$\\
+
+$Var(X)=p(1-p)$\\
+
+Likelihood n trials:\\
+
+$L_ n(X_1, \ldots , X_ n, p) =\\
+= p^{\sum _{i = 1}^ n X_ i} (1 -p)^{{\color{blue}{n - }} \sum _{i = 1}^ n X_ i}$ \\
+
+Loglikelihood n trials:\\
+
+$\ell_n (p) = \\ = \ln  \left( p \right) \sum _{i=1}^{n}X_{{i}}+ \left( n-\sum _{i=1}^{n}
+X_{{i}} \right) \ln  \left( 1-p \right) 
+$\\
+
+MLE:\\
+
+$\hat{p}_{MLE} = \frac{\sum^n_{i=1}(X_i)}{n}$\\
+
+Fisher Information:\\
+
+$I(p) = \frac{1}{p(1-p)}$\\
+
+Canonical exponential form:\\
+
+$f_{\theta}(y)=\exp\big(y\theta - \underbrace{\ln(1 + e^\theta)}_{b(\theta)} + \underbrace{0}_{c(y, \phi)}\big) \quad$\\
+
+$\theta = \ln\left(\frac{p}{1-p}\right)$\\
+$\phi = 1$\\
+
+\subsection*{Binomial}
+Parameters $p$ and $n$, discrete. Describes the number of successes
+in n independent Bernoulli trials.\\
+
+$p_x(k)= {n\choose k}{p}^{k} \left( 1-p \right) ^{n-k}$, $k=0,\ldots, n$\\
+
+$\mathbb{E}[X]=np$\\
+
+$Var(X)= np(1-p)$ \\
+
+Likelihood:\\
+
+$\displaystyle  L_ n(X_1, \ldots , X_ n, \theta ) =\\
+= \left( \prod _{i = 1}^ n \binom {K}{X_ i} \right) \theta ^{\sum _{i = 1}^ n X_ i} (1 - \theta )^{nK - \sum _{i = 1}^ n X_ i }$\\
+
+Loglikelihood:\\
+
+$\ell_n (\theta) = C + \left( \sum _{i = 1}^ n X_ i \right) \log \theta + \left( nK - \sum _{i = 1}^ n X_ i \right) \log (1 - \theta )$\\
+
+MLE:\\
+
+
+Fisher Information:\\
+
+$I(p) = \frac{n}{p(1-p)}$\\
+
+Canonical exponential form:\\
+
+$f_ p(y) =\\  
+exp (y \underbrace{(\ln (p)-\ln (1-p))}_{\theta } + \underbrace{n\ln (1-p)}_{-b(\theta )} +\underbrace{\ln(\binom {n}{y})}_{c(y,\phi )} )$
+
+\subsection*{Geometric}
+Number of $T$ trials up to (and including) the first success. 
+
+$p_T(t) = (1-p)^{t-1}, t=1,2,...$\\
+$\mathbb{E}[T]=\frac{1}{p}$\\
+$var(T)=\frac{1-p}{p^2}$
+
+\subsection*{Pascal}
+
+The negative binomial or Pascal distribution is a generalization of the geometric distribution. It relates to the random experiment of repeated independent trials until observing $m$ successes. I.e. the time of the kth arrival.
+
+$Y_k=T_1+...T_k$\\
+
+$T_i \sim iid Geometric(p)$\\
+
+$\mathbb{E}[Y_k]=\frac{k}{p}$\\
+
+$Var(Y_k)= \frac{k(1-p}{p^2}$
+
+$p_{Y_k}(t) ={t-1 \choose k-1}p^k(1-p)^{t-k}$\\
+
+$t=k,k+1,...$
+
+
+\subsection*{Multinomial}
+
+Parameters $n>0$ and $p_1, \ldots, p_r$.
+
+$p_x(x)= \frac{n!}{x_1!,\ldots,x_n!} p_1, \ldots, p_r$\\
+
+
+$\mathbb{E}[X_i]=n*p_i$\\
+
+$Var(X_i)=np_i(1-p_i)$\\
+
+
+Likelihood:\\
+
+$p_x(x)= \prod _{j=1}^{n}{p_{{j}}}^{T_{{j}}}$, where $T^j=\mathbbm{1}( X_i=j)$ is the count how often an outcome is seen in trials. \\
+
+Loglikelihood:\\
+$\ell_n= \sum _{j=2}^{n}T_{{j}}\ln  \left( p_{{j}} \right)$\\
+
+
+\subsection*{Poisson}
+Parameter $\lambda$. discrete, approximates the binomial PMF when $n$ is large, $p$ is small, and $\lambda = np$.\\
+
+$\mathbf{p_x}(k)=exp(-\lambda)\frac{\lambda^k}{k!}$ for $k=0,1, \ldots,$\\
+
+$\mathbb{E}[X]=\lambda$\\
+
+$Var(X)=\lambda$\\
+
+Likelihood:\\
+$L_ n(x_1, \ldots , x_ n, \lambda) = \prod _{i = 1}^ n \frac{\lambda^{\sum_{i=1}^{n} x_i}}{\prod _{i = 1}^ n x_i!} e^{-n\lambda}$\\
+
+Loglikelihood:\\
+$\ell_n (\lambda)= \\
+= -n\lambda + log(\lambda)(\sum_{i=1}^n x_i)) - log(\prod _{i = 1}^ n x_i!)$\\
+
+MLE:\\
+
+$\hat{\lambda}_{MLE} = \frac{1}{n} \sum^n_{i=1}(X_i)$\\
+
+Fisher Information:\\
+
+$I(\lambda)= \frac{1}{\lambda}$\\
+
+Canonical exponential form:\\
+
+$ f_{\theta}(y) = \exp\big(y\theta - \underbrace{e^\theta}_{b(\theta)} \underbrace{- \ln y!}_{c(y, \phi)}\big)$\\
+$\theta = \ln \lambda$\\
+$\phi = 1$\\
+
+Poisson process:\\
+k arrivals in t slots
+$\mathbf{p_x}(k,t) = \mathbb{P}(N_t=k)=e^{-\lambda t} \frac{(\lambda t)^k}{k!}$\\
+
+$\mathbb{E}[N_t]=\lambda t$\\
+
+$Var(N_t)=\lambda t$
+
+\subsection*{Exponential}
+Parameter $\lambda$, continuous\\
+$ f_x(x)=
+	\begin{cases}
+		 \lambda exp(-\lambda x),&\text{if x >= 0}\\
+		0,&\text{o.w.}\\
+	\end{cases}
+$\\
+
+$P(X>a)= exp(-\lambda a)$\\
+
+$ F_x(x)=
+	\begin{cases}
+		 1-exp(-\lambda x),&\text{if x >= 0}\\
+		0,&\text{o.w.}\\
+	\end{cases}
+$\\
+
+$\mathbb{E}[X]=\frac{1}{\lambda}$\\
+
+$\mathbb{E}[X^2]=\frac{2}{\lambda^2}$
+
+$Var(X)=\frac{1}{\lambda^2}$\\
+
+Likelihood:\\
+$L(X_1\dots X_n;\lambda)=\lambda^n\exp\left(-\lambda\sum_{i=1}^n X_i\right)$\\
+
+Loglikelihood:\\
+
+$\ell_n (\lambda)= n ln(\lambda) - \lambda \sum_{i=1}^n (X_i)$\\
+
+MLE:\\
+
+$\hat{\lambda}_{MLE}= \frac{n}{\sum^{n}_{i=1}(X_i)}$\\
+
+Fisher Information:\\
+
+$I(\lambda)= \frac{1}{\lambda^2}$\\
+
+Canonical exponential form:\\
+
+$f_{\theta}(y) = \exp\big(y\theta - \underbrace{(-\ln(-\theta))}_{b(\theta)} + \underbrace{0}_{c(y, \phi)}\big)$\\
+
+$\theta = -\lambda = -\frac1{\mu}$\\
+
+$\phi = 1$
+
+\subsection*{Shifted Exponential}
+
+Parameters $\lambda, a \in \mathbb{R}$, continuous\\
+$ f_x(x)=
+	\begin{cases}
+		 \lambda exp(-\lambda(x - a )),&{x >= a}\\
+		0,&{x <= a}\\
+	\end{cases}
+$\\
+
+$ F_x(x)=
+	\begin{cases}
+		 1-exp(-\lambda(x-a)),&{if x >= a}\\
+		0,&{x <= a}\\
+	\end{cases}
+$\\
+
+$\mathbb{E}[X]=a + \frac{1}{\lambda}$\\
+
+$Var(X)=\frac{1}{\lambda^2}$\\
+
+Likelihood:\\
+
+$L(X_1\dots X_n;\lambda,\theta)= \lambda ^ n \exp \left( -\lambda \sum _{i = 1}^ n (X_ i - a) \right) \mathbf{1}_{\min _{i = 1, \ldots , n}(X_ i) \geq a}.$
+
+Loglikelihood:\\
+
+$\ell (\lambda , a) := n \ln \lambda - \lambda \sum _{i = 1}^ n X_ i + n \lambda a$
+
+MLE:
+
+$\hat{\lambda }_{MLE} = \frac{1}{\overline{X}_ n - \hat{a}}$\\
+
+$\hat{a}_{MLE} = \min _{i =1, \ldots , n}(X_ i)$
+
+\subsection*{Univariate Gaussians}
+Parameters $\mu$ and $\sigma^2 >0$, continuous\\
+$f(x)= \frac{1}{\sqrt(2 \pi \sigma^2)} exp(-\frac{(x-\mu)^2}{2\sigma^2})$ \\
+$\mathbb{E}[X]=\mu$ \\
+$Var(X)=\sigma^2$\\
+
+CDF of standard gaussian:\\
+
+$\Phi (z) = \int _{-\infty }^ z \frac{1}{\sqrt{2 \pi }} e^{-x^2/2} \,  dx$
+
+Likelihood:\\
+
+$L(x_1\dots X_n;\mu,\sigma^2)=\\ 
+= \dfrac{1}{\left(\sigma\sqrt{2\pi}\right)^n}\exp{\left(-\dfrac{1}{2\sigma^2}\sum_{i=1}^n (X_i-\mu)^2 \right)}$\\
+
+Loglikelihood:\\
+
+$\ell_n (\mu,\sigma^2)= \\
+= -n log(\sigma\sqrt{2\pi})-\frac{1}{2\sigma^2}\sum_{i=1}^n (X_i-\mu)^2 $
+
+MLE:\\
+
+$\hat\mu_MLE = \bar X_ n\\
+\quad \widehat{\sigma ^2}_MLE = \frac{1}{n} \sum _{i=1}^{n} (X_ i - \bar X_ n)^2$
+
+Fisher Information:\\
+
+$I(\mu , \sigma ^2) = \begin{pmatrix}  \frac{1}{\sigma ^2} &  0 \\ 0 &  \frac{1}{2 \sigma ^4} \end{pmatrix}$
+
+Canonical exponential form:\\
+
+Gaussians are invariant under affine transformation:\\
+
+$aX+b \sim N(X+b,a^2\sigma^2)$\\
+
+Sum of independent gaussians:\\
+
+Let $X {\sim} N(\mu_X,\sigma_X^2)$ and $Y {\sim} N(\mu_Y,\sigma_Y^2)$\\
+
+If $Y = X + Z$, then $Y \sim N(\mu_X + \mu_Y, \sigma_X + \sigma_Y)$\\
+
+If $U = X - Y$, then $U \sim N(\mu_X - \mu_Y,\sigma_X + \sigma_Y)$\\
+
+Symmetry:\\
+
+If $X \sim\ N(0,\sigma^2),$ then $-X \sim N(0,\sigma^2)$\\
+
+$\mathbb{P}(|X|>x) = 2\mathbb{P}(X>x)$\\
+
+Standardization:\\
+
+$Z= \frac{X-\mu}{\sigma} \sim N(0,1)$\\
+
+$\mathbf{P}\left(X\leq t\right) = \displaystyle \mathbf{P}\left(Z\leq \frac{t-\mu}{\sigma}\right)$
+
+Higher moments:\\
+
+$\mathbb{E}[X^2] = \mu^2 + \sigma^2$\\
+$\mathbb{E}[X^3] = \mu^3 + 3\mu\sigma^2$\\
+$\mathbb{E}[X^4] = \mu^4 + 6\mu^2\sigma^2 +3\sigma^4$\\
+
+Quantiles:\\
+
+\subsection*{Uniform}
+
+Parameters $a$ and $b$, continuous.
+
+$ \mathbf{f_x}(x)=
+	\begin{cases}
+		 \frac{1}{b-a},&\text{if a < x <b}\\
+		0,&\text{o.w.}\\
+	\end{cases}
+$\\
+
+$ \mathbf{F_x}(x)=
+	\begin{cases}
+		 0,&for x \leq a\\
+		 \frac{x-a}{b-a},& x \in [a,b)\\
+		1,&x \geq b\\
+	\end{cases}
+$\\
+
+
+$\mathbb{E}[X]=\frac{a+b}{2}$\\
+$Var(X)=\frac{(b-a)^2}{12}$\\
+
+Likelihood:\\
+$L(x_1\dots x_n;b)=\frac{1(\max_i (x_i \leq b))} {b^n}$\\
+
+Loglikelihood:\\
+
+\subsection*{Cauchy}
+continuous, parameter $m$,
+
+$f_ m(x) = \frac{1}{\pi } \frac{1}{1 + (x - m)^2}$\\
+
+$\mathbb{E}[X]=not defined!$\\
+$Var(X)=not defined!$\\
+
+$\text {med}(X) = P(X > M) = P(X < M)\\ = 1/2 = \displaystyle \int _{1/2}^{\infty } \frac{1}{\pi } \cdot \frac{1}{1 + (x-m)^2} \,  dx$
+
+\subsection*{Chi squared}
+The $\chi _ d^2$ distribution with $d$ degrees of freedom is given by the distribution of $Z_1^2 + Z_2^2 + \cdots + Z_ d^2,$ where $Z_1, \ldots , Z_ d \stackrel{iid}{\sim } \mathcal{N}(0,1)$
+
+If $V \sim \chi^2_k:$\\
+
+$\mathbb{E}= \mathbb{E}[Z_1^2] + \mathbb{E}[Z_2^2] + \ldots + \mathbb{E}[Z_d^2] = d$\\ 
+
+$Var(V) = Var(Z_1^2) + Var(Z_2^2) + \ldots + Var(Z_d^2) = 2d$
+
+\subsection*{Student's T Distribution}
+
+$T_ n := \frac{Z}{\sqrt{V/n}}$ where $Z \sim \mathcal{N}(0,1)$, and $Z$ and $V$ are independent
